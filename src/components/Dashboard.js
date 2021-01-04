@@ -2,10 +2,18 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Axios from "axios";
 // import UserContext from "./context/userContext";
+
+// Routes
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Chart from './pages/Chart';
+import Deposits from './pages/Deposits';
+import Orders from './pages/Orders';
 
+// Layoutes
+import MyAppBar from './layouts/MyAppBar';
+import Footer from './layouts/Footer';
 
 // Material-UI
 import clsx from 'clsx';
@@ -20,11 +28,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
-import MyAppBar from './layouts/MyAppBar';
-import Footer from './layouts/Footer';
-import Chart from './pages/Chart';
-import Deposits from './pages/Deposits';
-import Orders from './pages/Orders';
+
 
 const drawerWidth = 240;
 
@@ -110,6 +114,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -120,53 +125,56 @@ export default function Dashboard() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <MyAppBar />
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            {/* <Grid item xs={12} md={8} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid> */}
-            {/* Recent Deposits */}
-            {/* <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid> */}
-            {/* Recent Orders */}
-            {/* <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid> */}
-            
-            {/* Main Grid */}
-            <Grid item xs={12} md={12} lg={12}>
-              <Paper className={fixedHeightPaper}>
-                <BrowserRouter>
-                  {/* <UserContext.Provider value={{ userData, setUserData }}> */}
-                    <div className="container">
-                      <Switch>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/register" component={Register} />
-                      </Switch>
-                    </div>
-                  {/* </UserContext.Provider> */}
-                </BrowserRouter>
-              </Paper>
-            </Grid>            
-          </Grid>
-          <Box pt={4}>
-            <Footer />
-          </Box>
-        </Container>
-      </main>
-    </div>
+      <BrowserRouter>
+        <CssBaseline />
+        <MyAppBar />
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg" className={classes.container}>
+            <Grid container spacing={3}>
+              {/* Chart */}
+              {/* <Grid item xs={12} md={8} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  <Chart />
+                </Paper>
+              </Grid> */}
+              {/* Recent Deposits */}
+              {/* <Grid item xs={12} md={4} lg={3}>
+                <Paper className={fixedHeightPaper}>
+                  <Deposits />
+                </Paper>
+              </Grid> */}
+              {/* Recent Orders */}
+              {/* <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                  <Orders />
+                </Paper>
+              </Grid> */}
+              
+              {/* Main Grid */}
+              <Grid item item xs={12} md={12} lg={12}>
+                <Paper className={fixedHeightPaper}>
+                    {/* <UserContext.Provider value={{ userData, setUserData }}> */}
+                      {/* <div className="container"> */}
+                        <Switch>
+                          <Route exact path="/home" component={Home} />
+                          <Route path="/login" component={Login} />
+                          <Route path="/register" component={Register} />
+                          <Route path="/chart" component={Chart} />
+                          <Route path="/deposits" component={Deposits} />
+                          <Route path="/orders" component={Orders} />
+                        </Switch>
+                      {/* </div> */}
+                    {/* </UserContext.Provider> */}
+                </Paper>
+              </Grid>            
+            </Grid>
+            <Box pt={4}>
+              <Footer />
+            </Box>
+          </Container>
+        </main>
+    </BrowserRouter>
+  </div>
   );
 }

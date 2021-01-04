@@ -1,9 +1,8 @@
 import React from 'react';
-// import {Link} from 'react-router-dom'
-
-
-
 import clsx from 'clsx';
+import { useHistory } from "react-router-dom";
+
+// Material-ui
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,22 +18,16 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import LoginIcon from '@material-ui/icons/LockOpen';
-
-import { mainListItems, secondaryListItems } from './ListItems';
-import Login from '../pages/Login';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PeopleIcon from '@material-ui/icons/People';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import LayersIcon from '@material-ui/icons/Layers';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const drawerWidth = 240;
 
@@ -118,12 +111,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MyAppBar() {
-  // const history = useHistory();
-  // const login = () => history.push('/login');
-  const preventDefault = (event) => event.preventDefault();
+  // History
+  const history = useHistory();
+  const login = () => history.push("/login");
+  const register = () => history.push("/register");
+  const home = () => history.push("/home");
+  const dashboard = () => history.push("/dashboard");
+  const chart = () => history.push("/chart");
+  const deposits = () => history.push("/deposits");
+  const orders = () => history.push("/orders");
 
-
-
+  // const preventDefault = (event) => event.preventDefault();
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -159,20 +157,19 @@ export default function MyAppBar() {
             </Badge>
           </IconButton>
 
-
-          <IconButton color="inherit">
+          <Button color="inherit" onClick={login}>
               <Badge color="secondary">
                 <LoginIcon />
               </Badge>
               Login
-          </IconButton>
-          
-          <Link href="https://react.semantic-ui.com/" onClick={preventDefault} color="inherit">
-            aaa
-          </Link>
+          </Button>
 
-
-
+          <Button color="inherit" onClick={register}>
+              <Badge color="secondary">
+                <LoginIcon />
+              </Badge>
+              Register
+          </Button>
 
         </Toolbar>
       </AppBar>
@@ -188,11 +185,75 @@ export default function MyAppBar() {
             <ChevronLeftIcon />
           </IconButton>
         </div>
+
+        {/* mainListItems */}
         <Divider />
-        <List>{mainListItems}</List>
+        <List>
+          
+          <ListItem button onClick={home}>
+            <ListItemIcon>
+              <LayersIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+
+          <ListItem button onClick={dashboard}>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+
+          <ListItem button onClick={orders}>
+            <ListItemIcon>
+              <ShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Orders" />
+          </ListItem>
+
+          <ListItem button onClick={deposits}>
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Deposits" />
+          </ListItem>
+
+          <ListItem button onClick={chart}>
+            <ListItemIcon>
+              <BarChartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reports" />
+          </ListItem>
+
+        </List>
+
+        {/* Secondary List Items */}
         <Divider />
-        <List>{secondaryListItems}</List>
+        <List>
+          <ListSubheader inset>Saved reports</ListSubheader>
+
+          <ListItem button>
+            <ListItemIcon>
+              <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Current month" />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon>
+              <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Last quarter" />
+          </ListItem>
+
+          <ListItem button>
+            <ListItemIcon>
+              <AssignmentIcon />
+            </ListItemIcon>
+            <ListItemText primary="Year-end sale" />
+          </ListItem>
+        </List>
       </Drawer>
-      </>
+    </>
   );
 }
